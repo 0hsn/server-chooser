@@ -68,4 +68,29 @@ class ServerCategoryTransformer
 
         return $data;
     }
+
+    /**
+     * Add hdd type to data
+     *
+     * @param array $dataIn
+     * @return array
+     */
+    public function addHddTypeInfo(array $dataIn): array
+    {
+        $data = $dataIn;
+
+        foreach ($data as &$serverInf) {
+            if (str_contains($serverInf['HDD'], 'SAS')) {
+                $serverInf['HddType'] = 'SAS';
+            } else if (str_contains($serverInf['HDD'], 'SATA')) {
+                $serverInf['HddType'] = 'SATA';
+            } else if (str_contains($serverInf['HDD'], 'SSD')) {
+                $serverInf['HddType'] = 'SSD';
+            } else {
+                $serverInf['HddType'] = '';
+            }
+        }
+
+        return $data;
+    }
 }

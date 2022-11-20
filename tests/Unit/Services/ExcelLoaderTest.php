@@ -15,16 +15,10 @@ class ExcelLoaderTest extends KernelTestCase
     {
         self::bootKernel();
 
-        $container = static::getContainer();
-        $logger = $container->get('logger');
-
-        $el = new ExcelLoader($logger);
+        $el = new ExcelLoader;
         $data = $el->getArrFromExl(
             getcwd()."/var/uploads/LeaseWeb_servers_filters_assignment.xlsx"
         );
-
-        dump($data[0]);
-        dump($data[1]);
 
         $this->assertIsArray($data);
     }

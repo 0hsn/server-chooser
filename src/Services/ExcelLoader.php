@@ -5,21 +5,14 @@ namespace App\Services;
 use Doctrine\Common\Collections\ArrayCollection;
 use PhpOffice\PhpSpreadsheet\Reader\Exception;
 use PhpOffice\PhpSpreadsheet\Reader\Xlsx;
-use Psr\Log\LoggerInterface;
 
 class ExcelLoader
 {
     /**
-     * @var LoggerInterface
+     * Constructor
      */
-    protected LoggerInterface $logger;
-
-    /**
-     * @param LoggerInterface $logger
-     */
-    public function __construct(LoggerInterface $logger)
+    public function __construct()
     {
-        $this->logger = $logger;
     }
 
     /**
@@ -29,7 +22,7 @@ class ExcelLoader
      * @return array
      * @throws Exception
      */
-    public function getArrFromExl(string $filePath) : array
+    public function getArrFromExl(string $filePath): array
     {
         // Check if file
         if (is_file($filePath)) {
@@ -58,7 +51,7 @@ class ExcelLoader
             $arrColl = $arrColl->map(function ($item) use ($title) {
                 $temp = [];
 
-                foreach($title as $index => $key) {
+                foreach ($title as $index => $key) {
                     $temp[$key] = $item[$index];
                 }
 

@@ -51,8 +51,9 @@
 # Embedded web-server pid file
 /.web-server-pid
 
-# ignoew environment config
+# ignore environment config
 .env
+.DS_Store
 
 ###> phpunit/phpunit ###
 /phpunit.xml

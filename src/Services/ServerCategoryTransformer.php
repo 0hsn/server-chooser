@@ -45,4 +45,27 @@ class ServerCategoryTransformer
 
         return $data;
     }
+
+    /**
+     * Add ram size category to data
+     *
+     * @param array $dataIn
+     * @return array
+     */
+    public function addRamSizeInfo(array $dataIn): array
+    {
+        $data = $dataIn;
+        $sizes = ['2GB', '4GB', '8GB', '12GB', '16GB', '24GB', '32GB', '48GB', '64GB', '96GB'];
+
+        foreach ($data as &$serverInf) {
+            $ram = $serverInf['RAM'];
+            $serverInf['RamSize'] = substr($ram, 0, strpos($ram, 'DDR'));
+
+            if (!in_array($serverInf['RamSize'], $sizes)) {
+                $serverInf['RamSize'] = '';
+            }
+        }
+
+        return $data;
+    }
 }

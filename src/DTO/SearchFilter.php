@@ -56,4 +56,16 @@ class SearchFilter
     {
         $this->hddType = in_array($hddType, static::HDD_TYPE) ? $hddType : '';
     }
+
+    /**
+     * Check is all filter data empty
+     *
+     * @return bool
+     */
+    public function isAllEmpty() : bool
+    {
+        return empty($this->storage) &&
+            empty($this->ramSize) &&
+            empty($this->hddType);
+    }
 }

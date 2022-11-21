@@ -43,6 +43,10 @@ class SearchService
             );
         }
 
+        if ($filter->isAllEmpty()) {
+            return array_values($data);
+        }
+
         $servers = new ArrayCollection($data);
         $criteria = new Criteria();
 

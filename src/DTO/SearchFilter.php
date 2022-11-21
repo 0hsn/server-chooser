@@ -2,6 +2,8 @@
 
 namespace App\DTO;
 
+use Symfony\Component\HttpFoundation\Request;
+
 class SearchFilter
 {
     const STORAGES = [
@@ -67,5 +69,20 @@ class SearchFilter
         return empty($this->storage) &&
             empty($this->ramSize) &&
             empty($this->hddType);
+    }
+
+    /**
+     * @param Request $request
+     * @return SearchFilter
+     */
+    public static function fromRequest(Request $request): static
+    {
+        $filter = new SearchFilter;
+
+        $filter->setStorage($request->query->get('storage', ''));
+        $filter->setHDDType($request->query->get('hdd_type', ''));
+        $filter->setRamSize($request->query->get('ram_size', ''));
+
+        return $filter;
     }
 }

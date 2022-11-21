@@ -57,7 +57,10 @@ class LoadExcelCommand extends Command
 
             $outFile = getcwd()."/var/uploads/data.bin";
 
-            unlink($outFile); // delete file
+            if (file_exists($outFile)) {
+                unlink($outFile); // delete file
+            }
+
             file_put_contents($outFile, $serialized); // write file
 
             $io->info(sprintf('Processed file [SUCCESS]: %s', $outFile));

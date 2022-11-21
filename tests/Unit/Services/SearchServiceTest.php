@@ -17,7 +17,7 @@ class SearchServiceTest extends KernelTestCase
     {
         self::bootKernel();
 
-        $serv = new SearchService();
+        $serv = new SearchService(getcwd());
         $data = $serv->loadBinData();
 
         $this->assertIsArray($data);
@@ -27,7 +27,7 @@ class SearchServiceTest extends KernelTestCase
     {
         self::bootKernel();
 
-        $serv = new SearchService();
+        $serv = new SearchService(getcwd());
 
         $filter = new SearchFilter;
         $filter->setRamSize('32GB');
@@ -45,7 +45,7 @@ class SearchServiceTest extends KernelTestCase
     {
         self::bootKernel();
 
-        $serv = new SearchService();
+        $serv = new SearchService(getcwd());
 
         $filter = new SearchFilter;
         $filter->setHDDType('SATA');
@@ -63,7 +63,7 @@ class SearchServiceTest extends KernelTestCase
     {
         self::bootKernel();
 
-        $serv = new SearchService();
+        $serv = new SearchService(getcwd());
 
         $filter = new SearchFilter;
         $filter->setStorage('500GB');
@@ -81,7 +81,7 @@ class SearchServiceTest extends KernelTestCase
     {
         self::bootKernel();
 
-        $serv = new SearchService();
+        $serv = new SearchService(getcwd());
 
         $filter = new SearchFilter;
         $filter->setStorage('500GB');
@@ -100,7 +100,7 @@ class SearchServiceTest extends KernelTestCase
     {
         self::bootKernel();
 
-        $serv = new SearchService();
+        $serv = new SearchService(getcwd());
         $filter = new SearchFilter;
 
         $data = $serv->search($filter);

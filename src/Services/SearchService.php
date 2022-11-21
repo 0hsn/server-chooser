@@ -6,10 +6,21 @@ use App\DTO\SearchFilter;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Criteria;
 use Doctrine\Common\Collections\Expr\Comparison;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Translation\Exception\NotFoundResourceException;
 
 class SearchService
 {
+    /**
+     * @var string project root dir
+     */
+    protected string $projectRoot = '';
+
+    public function __construct(string $projectRoot)
+    {
+        $this->projectRoot = $projectRoot;
+    }
+
     /**
      * Load binary data file that stores processed data
      *
@@ -17,7 +28,7 @@ class SearchService
      */
     public function loadBinData() : array
     {
-        $inFile = getcwd()."/var/uploads/data.bin";
+        $inFile = $this->projectRoot."/var/uploads/data.bin";
 
         if (file_exists($inFile) && is_file($inFile)) {
             $serialized = file_get_contents($inFile);
@@ -39,7 +50,8 @@ class SearchService
             $data = $this->loadBinData();
         } catch (\Throwable $throwable) {
             throw new NotFoundResourceException(
-                "System is unable to respond at this moment."
+                "System is unable to respond at this moment.",
+                500,
             );
         }
 

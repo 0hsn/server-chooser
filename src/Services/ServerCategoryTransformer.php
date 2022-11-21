@@ -3,6 +3,8 @@
 namespace App\Services;
 
 
+use App\DTO\SearchFilter;
+
 class ServerCategoryTransformer
 {
     /**
@@ -55,13 +57,12 @@ class ServerCategoryTransformer
     public function addRamSizeInfo(array $dataIn): array
     {
         $data = $dataIn;
-        $sizes = ['2GB', '4GB', '8GB', '12GB', '16GB', '24GB', '32GB', '48GB', '64GB', '96GB'];
 
         foreach ($data as &$serverInf) {
             $ram = $serverInf['RAM'];
             $serverInf['RamSize'] = substr($ram, 0, strpos($ram, 'DDR'));
 
-            if (!in_array($serverInf['RamSize'], $sizes)) {
+            if (!in_array($serverInf['RamSize'], SearchFilter::RAM_SIZE)) {
                 $serverInf['RamSize'] = '';
             }
         }

@@ -89,10 +89,23 @@ class SearchFilter
     {
         $filter = new SearchFilter;
 
-        $filter->setStorage($request->query->get('storage', ''));
+        $filter->setStorage($request->query->get('storage_under', ''));
         $filter->setHDDType($request->query->get('hdd_type', ''));
         $filter->setRamSize($request->query->get('ram_size', ''));
 
         return $filter;
+    }
+
+    /**
+     * @return array
+     */
+    public function getStorageRange(): array
+    {
+        $index = array_search($this->storage, static::STORAGES, true);
+        if ($index < sizeof(static::STORAGES)) {
+            $index++;
+        }
+
+        return array_slice(static::STORAGES, 0, $index);
     }
 }

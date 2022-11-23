@@ -22,7 +22,7 @@
             <select x-model="selectedHddType" class="form-select form-control" aria-label="Default select example" id="hdd-type">
               <option value="NIL">Select value</option>
               <template x-for="hdt in hddType" :key="hdt">
-                <option :value="hdt" x-text="hdt"></option>
+                <option :value="hdt" x-text="hdt" :selected="hdt === selectedHddType"></option>
               </template>
             </select>
 
@@ -53,9 +53,10 @@
             <select x-model="selectedLocation" class="form-select form-control" id="location">
               <option value="NIL">Select a location</option>
               <template x-for="loc in Object.keys(locations)" :key="loc">
-                <option :value="loc" x-text="locations[loc]"></option>
+                <option :value="loc" x-text="locations[loc]" :selected="loc === selectedLocation"></option>
               </template>
             </select>
+
           </div>
 
         </div>
@@ -140,6 +141,14 @@
         storageSliderValues: {{ storage_slider_values|json_encode|raw }},
 
         init() {
+          const urlParams = new URLSearchParams(window.location.search)
+
+          this.selectedHddType = urlParams.get('hdd_type') ?? 'NIL'
+          this.selectedLocation = urlParams.get('location') ?? 'NIL'
+          this.storageSliderPoint = this.storageSliderValues.indexOf(urlParams.get('storage_under') ?? '1TB')
+          this.selectedRamSize = urlParams.get('ram_size') ? urlParams.get('ram_size').split(',') : []
+
+
           console.log(this.apiUrl + window.location.search)
           fetch(this.apiUrl + window.location.search)
             .then(response => response.text())
@@ -154,25 +163,29 @@
 
           if (this.selectedHddType !== "NIL") {
             urlParams.set('hdd_type', this.selectedHddType)
+          } else {
+            urlParams.delete('hdd_type')
           }
 
           if (this.selectedLocation !== "NIL") {
             urlParams.set('location', this.selectedLocation)
+          } else {
+            urlParams.delete('location')
           }
 
-          let ram_sizes = ""
           if (this.selectedRamSize.length > 0) {
-            urlParams.delete('ram_size')
             for (index in this.selectedRamSize) {
-              ram_sizes += 'ram_size[]=' + this.selectedRamSize[index] + '&'
+              urlParams.set('ram_size', this.selectedRamSize.join(','))
             }
+          } else {
+            urlParams.delete('ram_size')
           }
 
           if (this.storageSliderPoint !== 0) {
             urlParams.set('storage_under', this.storageSliderValues[this.storageSliderPoint])
           }
 
-          window.location.href = this.webUrl + '?' + urlParams.toString() + '&' + ram_sizes;
+          window.location.href = this.webUrl + '?' + urlParams.toString()
         }
       }
     }

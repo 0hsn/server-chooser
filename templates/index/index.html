@@ -1,0 +1,260 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Server chooser</title>
+    <link rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon">
+    <link href="//cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <script src="//unpkg.com/alpinejs" defer></script>
+  </head>
+  <body>
+    <div class="container" x-data="initState()">
+      <section id="sc-filter">
+        <div class="row">
+          <h1 class="mt-5 pb-3">Server chooser</h1>
+        </div>
+        <div class="row">
+          <div class="col-6 col-sm-6">
+            <div class="mb-3">
+              <!-- https://stackoverflow.com/questions/10004723/html5-input-type-range-show-range-value -->
+              <label for="storage" class="form-label">Storage [&lt; <strong x-text="storageSliderValues[storageSliderPoint]" ></strong>]</label>
+              <input type="range" class="form-range" min="0" max="10" step="1" x-model="storageSliderPoint" id="storage">
+            </div>
+          </div>
+          <div class="col-6 col-sm-2">
+            <div class="mb-3">
+              <label for="hdd-type" class="form-label">Harddisk type</label>
+              <select x-model="selectedHddType" class="form-select form-control" aria-label="Default select example" id="hdd-type">
+                <option value="NIL">Select value</option>
+                <template x-for="hdt in hddType" :key="hdt">
+                  <option :value="hdt" x-text="hdt"></option>
+                </template> 
+              </select>
+
+            </div>
+          </div>
+      
+          <!-- Force next columns to break to new line at md breakpoint and up -->
+          <div class="w-100 d-none d-md-block"></div>
+      
+          <div class="col-6 col-sm-6">
+            <div class="mb-3">
+              <div class="row">
+                <template x-for="ramSize in ramSizes" :key="ramSize">
+                  <div class="col-2">
+                    <div class="form-check">
+                      <input x-model="selectedRamSize" class="form-check-input" type="checkbox" :value="ramSize" :id="`ram-${ramSize}`">
+                      <label class="form-check-label" :for="`ram-${ramSize}`" x-text="ramSize"></label>
+                    </div>
+                  </div>
+                </template>
+              </div>
+            </div>
+  
+          </div>
+          <div class="col-6 col-sm-2">
+            <div class="mb-3">
+              <label for="location" class="form-label">Location</label>
+              <select x-model="selectedLocation" class="form-select form-control" id="location">
+                <option value="NIL">Select a location</option>
+                <template x-for="loc in locations" :key="loc.key">
+                  <option :value="loc.key" x-text="loc.val"></option>
+                </template> 
+              </select>
+            </div>
+  
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-6 col-sm-6">
+            <div class="mb-3">
+              <button type="submit" class="btn btn-primary mb-3">Apply filters</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+      <section id="sc-body">
+        <div class="w-75 mb-3">
+          <span><strong>486</strong> results in total</span>
+        </div>
+
+        <div class="card w-75 mb-3">
+          <div class="card-body">
+            <h5 class="card-title">Dell R210Intel Xeon X3440</h5>
+            <p class="card-text">Ram: <strong>16GBDDR3</strong>, HDD: <strong>2x2TBSATA2</strong>, Location: <strong>AmsterdamAMS-01</strong></p>
+            <h6 class="card-title">€49.99</h6>
+          </div>
+        </div>
+        
+        <div class="card w-75 mb-3">
+          <div class="card-body">
+            <h5 class="card-title">Dell R210Intel Xeon X3440</h5>
+            <p class="card-text">Ram: <strong>16GBDDR3</strong>, HDD: <strong>2x2TBSATA2</strong>, Location: <strong>AmsterdamAMS-01</strong></p>
+            <h6 class="card-title">€49.99</h6>
+          </div>
+        </div>
+        
+        <div class="card w-75 mb-3">
+          <div class="card-body">
+            <h5 class="card-title">Dell R210Intel Xeon X3440</h5>
+            <p class="card-text">Ram: <strong>16GBDDR3</strong>, HDD: <strong>2x2TBSATA2</strong>, Location: <strong>AmsterdamAMS-01</strong></p>
+            <h6 class="card-title">€49.99</h6>
+          </div>
+        </div>
+        
+        <div class="card w-75 mb-3">
+          <div class="card-body">
+            <h5 class="card-title">Dell R210Intel Xeon X3440</h5>
+            <p class="card-text">Ram: <strong>16GBDDR3</strong>, HDD: <strong>2x2TBSATA2</strong>, Location: <strong>AmsterdamAMS-01</strong></p>
+            <h6 class="card-title">€49.99</h6>
+          </div>
+        </div>
+        
+        <div class="card w-75 mb-3">
+          <div class="card-body">
+            <h5 class="card-title">Dell R210Intel Xeon X3440</h5>
+            <p class="card-text">Ram: <strong>16GBDDR3</strong>, HDD: <strong>2x2TBSATA2</strong>, Location: <strong>AmsterdamAMS-01</strong></p>
+            <h6 class="card-title">€49.99</h6>
+          </div>
+        </div>
+        
+        <div class="card w-75 mb-3">
+          <div class="card-body">
+            <h5 class="card-title">Dell R210Intel Xeon X3440</h5>
+            <p class="card-text">Ram: <strong>16GBDDR3</strong>, HDD: <strong>2x2TBSATA2</strong>, Location: <strong>AmsterdamAMS-01</strong></p>
+            <h6 class="card-title">€49.99</h6>
+          </div>
+        </div>
+        
+        <div class="card w-75 mb-3">
+          <div class="card-body">
+            <h5 class="card-title">Dell R210Intel Xeon X3440</h5>
+            <p class="card-text">Ram: <strong>16GBDDR3</strong>, HDD: <strong>2x2TBSATA2</strong>, Location: <strong>AmsterdamAMS-01</strong></p>
+            <h6 class="card-title">€49.99</h6>
+          </div>
+        </div>
+        
+        <div class="card w-75 mb-3">
+          <div class="card-body">
+            <h5 class="card-title">Dell R210Intel Xeon X3440</h5>
+            <p class="card-text">Ram: <strong>16GBDDR3</strong>, HDD: <strong>2x2TBSATA2</strong>, Location: <strong>AmsterdamAMS-01</strong></p>
+            <h6 class="card-title">€49.99</h6>
+          </div>
+        </div>
+        
+        <div class="card w-75 mb-3">
+          <div class="card-body">
+            <h5 class="card-title">Dell R210Intel Xeon X3440</h5>
+            <p class="card-text">Ram: <strong>16GBDDR3</strong>, HDD: <strong>2x2TBSATA2</strong>, Location: <strong>AmsterdamAMS-01</strong></p>
+            <h6 class="card-title">€49.99</h6>
+          </div>
+        </div>
+        
+        <div class="card w-75 mb-3">
+          <div class="card-body">
+            <h5 class="card-title">Dell R210Intel Xeon X3440</h5>
+            <p class="card-text">Ram: <strong>16GBDDR3</strong>, HDD: <strong>2x2TBSATA2</strong>, Location: <strong>AmsterdamAMS-01</strong></p>
+            <h6 class="card-title">€49.99</h6>
+          </div>
+        </div>
+        
+        <div class="card w-75 mb-3">
+          <div class="card-body">
+            <h5 class="card-title">Dell R210Intel Xeon X3440</h5>
+            <p class="card-text">Ram: <strong>16GBDDR3</strong>, HDD: <strong>2x2TBSATA2</strong>, Location: <strong>AmsterdamAMS-01</strong></p>
+            <h6 class="card-title">€49.99</h6>
+          </div>
+        </div>
+        
+        <div class="card w-75 mb-3">
+          <div class="card-body">
+            <h5 class="card-title">Dell R210Intel Xeon X3440</h5>
+            <p class="card-text">Ram: <strong>16GBDDR3</strong>, HDD: <strong>2x2TBSATA2</strong>, Location: <strong>AmsterdamAMS-01</strong></p>
+            <h6 class="card-title">€49.99</h6>
+          </div>
+        </div>
+        
+        <div class="card w-75 mb-3">
+          <div class="card-body">
+            <h5 class="card-title">Dell R210Intel Xeon X3440</h5>
+            <p class="card-text">Ram: <strong>16GBDDR3</strong>, HDD: <strong>2x2TBSATA2</strong>, Location: <strong>AmsterdamAMS-01</strong></p>
+            <h6 class="card-title">€49.99</h6>
+          </div>
+        </div>
+        
+        <div class="card w-75 mb-3">
+          <div class="card-body">
+            <h5 class="card-title">Dell R210Intel Xeon X3440</h5>
+            <p class="card-text">Ram: <strong>16GBDDR3</strong>, HDD: <strong>2x2TBSATA2</strong>, Location: <strong>AmsterdamAMS-01</strong></p>
+            <h6 class="card-title">€49.99</h6>
+          </div>
+        </div>
+        <div class="card w-75 mb-3">
+          <div class="card-body">
+            <h5 class="card-title">No matching result found.</h5>
+            <p class="card-text">Please do another search.</p>
+          </div>
+        </div>
+
+        <div class="w-75 mb-3">
+          <nav aria-label="Page navigation example">
+            <ul class="pagination justify-content-end">
+              <li class="page-item disabled">
+                <a class="page-link">First</a>
+              </li>
+              <li class="page-item disabled">
+                <a class="page-link">&laquo;</a>
+              </li>
+              <li class="page-item"><span class="page-link" style="color:black;" aria-readonly>1 of 33</span></li>
+              <!-- <li class="page-item"><a class="page-link" href="#">2</a></li> -->
+              <!-- <li class="page-item"><a class="page-link" href="#">3</a></li> -->
+              <li class="page-item">
+                <a class="page-link" href="#">&raquo;</a>
+              </li>
+              <li class="page-item">
+                <a class="page-link" href="#">Last</a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+        
+      </section>
+
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+    <script>
+      function initState() {
+        return {
+          // hdd
+          hddType: ['SAS', 'SATA', 'SSD', 'Other'],
+          selectedHddType: 'NIL',
+
+          // locations
+          locations: [
+            {key: 'AMS-01', val: 'Amsterdam'},
+            {key: 'WDC-01', val: 'Washington D.C.'},
+            {key: 'SFO-12', val: 'San Francisco'},
+            {key: 'SIN-11', val: 'Singapore'},
+            {key: 'DAL-10', val: 'Dallas'},
+            {key: 'FRA-10', val: 'Frankfurt'},
+            {key: 'HKG-10', val: 'Hong Kong'},
+          ],
+          selectedLocation: 'NIL',
+
+          // hdd
+          ramSizes: ['2GB', '4GB', '8GB', '12GB', '16GB', '24GB', '32GB', '48GB', '64GB', '96GB', 'Other'],
+          selectedRamSize: [],
+
+          // storage
+          storageSliderPoint: 2,
+          selectedStorage: 2,
+          storageSliderValues: ['250GB', '500GB', '1TB', '2TB', '3TB', '4TB', '8TB', '12TB', '24TB', '48TB', '72TB'],
+        }
+      }
+
+    </script>
+  </body>
+</html>

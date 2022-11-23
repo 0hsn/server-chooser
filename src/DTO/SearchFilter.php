@@ -22,6 +22,16 @@ class SearchFilter
         'SAS', 'SATA', 'SSD',
     ];
 
+    const LOCATIONS = [
+        'AMS-01' => 'Amsterdam',
+        'WDC-01' => 'Washington D.C.',
+        'SFO-12' => 'San Francisco',
+        'SIN-11' => 'Singapore',
+        'DAL-10' => 'Dallas',
+        'FRA-10' => 'Frankfurt',
+        'HKG-10' => 'Hong Kong',
+    ];
+
     public string $storage = "";
     public string $ramSize = "";
     public string $hddType = "";

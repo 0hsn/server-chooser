@@ -61,10 +61,6 @@ class ServerCategoryTransformer
         foreach ($data as &$serverInf) {
             $ram = $serverInf['RAM'];
             $serverInf['RamSize'] = substr($ram, 0, strpos($ram, 'DDR'));
-
-            if (!in_array($serverInf['RamSize'], SearchFilter::RAM_SIZE)) {
-                $serverInf['RamSize'] = '';
-            }
         }
 
         return $data;

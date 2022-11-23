@@ -6,7 +6,6 @@ use App\DTO\SearchFilter;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Criteria;
 use Doctrine\Common\Collections\Expr\Comparison;
-use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Translation\Exception\NotFoundResourceException;
 
 class SearchService
@@ -75,9 +74,11 @@ class SearchService
         }
 
         if (! empty($filter->storage)) {
-            $criteria->where(
-                new Comparison('Storage', '=', $filter->storage)
-            );
+            $storageRange = $filter->getStorageRange();
+
+            foreach ($storageRange as $storage) {
+                $criteria->orWhere(new Comparison('Storage', Comparison::EQ, $storage));
+            }
         }
 
         $matchingServers = $servers->matching($criteria);

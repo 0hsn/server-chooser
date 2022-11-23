@@ -62,9 +62,9 @@ class SearchService
         $criteria = new Criteria();
 
         if (! empty($filter->ramSize)) {
-            $criteria->where(
-                new Comparison('RamSize', '=', $filter->ramSize)
-            );
+            foreach ($filter->ramSize as $rs) {
+                $criteria->orWhere(new Comparison('RamSize', Comparison::EQ, $rs));
+            }
         }
 
         if (! empty($filter->hddType)) {

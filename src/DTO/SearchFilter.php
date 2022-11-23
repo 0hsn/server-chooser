@@ -33,7 +33,7 @@ class SearchFilter
     ];
 
     public string $storage = "";
-    public string $ramSize = "";
+    public array $ramSize = [];
     public string $hddType = "";
 
     /**
@@ -55,7 +55,11 @@ class SearchFilter
      */
     public function setRamSize(string $ramSize): void
     {
-        $this->ramSize = in_array($ramSize, static::RAM_SIZE) ? $ramSize : '';
+        foreach(explode(',', $ramSize) as $rs) {
+            if (in_array($rs, static::RAM_SIZE)) {
+                $this->ramSize[] = $rs;
+            }
+        }
     }
 
     /**

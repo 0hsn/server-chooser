@@ -24,6 +24,19 @@ Steps to install:
     ```bash
     $ cd server-chooser
     ```
+
+- <details>
+    <summary>Add `.env`</summary>
+
+    Add a .env file with following content in current directory.
+  
+    ```ini
+        APP_ENV=dev
+        APP_SECRET=5f6bf8f899b3359da6d9667612ca5ca4
+        MESSENGER_TRANSPORT_DSN=doctrine://default?auto_setup=0
+        DATABASE_URL="sqlite:///%kernel.project_dir%/var/data.db"
+    ```
+    </details>
     
 - Install packages 
     ```bash

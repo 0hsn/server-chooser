@@ -139,4 +139,48 @@ class ServerCategoryTransformerTest extends KernelTestCase
 
         $this->assertEqualsCanonicalizing($expected, $actual);
     }
+
+    public function testAddLocationInfo(): void
+    {
+        $data = [
+            [
+              "Model" => "HP DL180G62x Intel Xeon E5620",
+              "RAM" => "2GBDDR3",
+              "HDD" => "8x2TBSATA2",
+              "Location" => "AmsterdamAMS-01",
+              "Price" => "€119.00",
+            ], [
+              "Model" => "HP DL380eG82x Intel Xeon E5-2420",
+              "RAM" => "32GBDDR3",
+              "HDD" => "2x120GBSSD",
+              "Location" => "AmsterdamAMS-01",
+              "Price" => "€131.99",
+            ],
+        ];
+
+        $expected = [
+            [
+              "Model" => "HP DL180G62x Intel Xeon E5620",
+              "RAM" => "2GBDDR3",
+              "HDD" => "8x2TBSATA2",
+              "Location" => "AmsterdamAMS-01",
+              "Price" => "€119.00",
+              "LocationID" => "AMS-01",
+            ], [
+              "Model" => "HP DL380eG82x Intel Xeon E5-2420",
+              "RAM" => "32GBDDR3",
+              "HDD" => "2x120GBSSD",
+              "Location" => "AmsterdamAMS-01",
+              "Price" => "€131.99",
+              "LocationID" => "AMS-01",
+            ],
+        ];
+
+        self::bootKernel();
+
+        $sct = new ServerCategoryTransformer;
+        $actual = $sct->addLocationInfo($data);
+
+        $this->assertEqualsCanonicalizing($expected, $actual);
+    }
 }

@@ -75,4 +75,21 @@ class ServerCategoryTransformer
 
         return $data;
     }
+
+    /**
+     * Add location to data
+     *
+     * @param array $dataIn
+     * @return array
+     */
+    public function addLocationInfo(array $dataIn): array
+    {
+        $data = $dataIn;
+
+        foreach ($data as &$serverInf) {
+            $serverInf['LocationID'] = substr($serverInf['Location'], -6);
+        }
+
+        return $data;
+    }
 }

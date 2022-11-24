@@ -71,7 +71,7 @@ class SearchServiceTest extends KernelTestCase
         $data = $serv->search($filter);
 
         if (! empty($data)) {
-            $this->assertEquals('500GB', $data[0]['Storage']);
+            $this->assertLessThanOrEqual(0.5, $data[0]['StorageInTB']);
         } else {
             $this->markTestSkipped();
         }
@@ -90,7 +90,8 @@ class SearchServiceTest extends KernelTestCase
         $data = $serv->search($filter);
 
         if (! empty($data)) {
-            $this->assertEquals('500GB', $data[0]['Storage']);
+            $this->assertLessThanOrEqual(0.5, $data[0]['StorageInTB']);
+            $this->assertEquals('SATA', $data[0]['HddType']);
         } else {
             $this->markTestSkipped();
         }

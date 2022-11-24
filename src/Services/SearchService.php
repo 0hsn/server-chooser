@@ -63,13 +63,15 @@ class SearchService
 
         if (! empty($filter->ramSize)) {
             foreach ($filter->ramSize as $rs) {
-                $criteria->orWhere(new Comparison('RamSize', Comparison::EQ, $rs));
+                $criteria->orWhere(
+                    new Comparison('RamSize', Comparison::EQ, $rs)
+                );
             }
         }
 
         if (! empty($filter->hddType)) {
-            $criteria->where(
-                new Comparison('HddType', '=', $filter->hddType)
+            $criteria->andWhere(
+                new Comparison('HddType', Comparison::EQ, $filter->hddType)
             );
         }
 
@@ -87,7 +89,9 @@ class SearchService
                 $storage = $storage / 1000;
             }
 
-            $criteria->orWhere(new Comparison('StorageInTB', Comparison::LTE, $storage));
+            $criteria->andWhere(
+                new Comparison('StorageInTB', Comparison::LTE, $storage)
+            );
         }
 
         $matchingServers = $servers->matching($criteria);

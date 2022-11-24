@@ -32,14 +32,14 @@ class ServerCategoryTransformerTest extends KernelTestCase
                 "HDD" => "8x2TBSATA2",
                 "Location" => "AmsterdamAMS-01",
                 "Price" => "€119.00",
-                "Storage" => "2TB",
+                "StorageInTB" => "2",
             ], [
                 "Model" => "HP DL380eG82x Intel Xeon E5-2420",
                 "RAM" => "32GBDDR3",
                 "HDD" => "8x2TBSATA2",
                 "Location" => "AmsterdamAMS-01",
                 "Price" => "€131.99",
-                "Storage" => "2TB",
+                "StorageInTB" => "2",
             ],
         ];
 

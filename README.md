@@ -3,6 +3,8 @@
 **Server chooser** is a web application that you can use to search servers for stored 
 data.
 
+[Architectural doc](docs/architecture.md) contains details about system design.
+
 ### Installation
 
 To install the software the pre-requisites are 

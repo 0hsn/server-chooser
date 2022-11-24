@@ -94,6 +94,12 @@ class SearchService
             );
         }
 
+        if (! empty($filter->location)) {
+            $criteria->andWhere(
+                new Comparison('LocationID', Comparison::EQ, $filter->location)
+            );
+        }
+
         $matchingServers = $servers->matching($criteria);
         return array_values($matchingServers->toArray());
     }

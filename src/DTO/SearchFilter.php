@@ -94,7 +94,8 @@ class SearchFilter
     {
         return empty($this->storage) &&
             empty($this->ramSize) &&
-            empty($this->hddType);
+            empty($this->hddType) &&
+            empty($this->location);
     }
 
     /**
@@ -108,6 +109,7 @@ class SearchFilter
         $filter->setStorage($request->query->get('storage_under', ''));
         $filter->setHDDType($request->query->get('hdd_type', ''));
         $filter->setRamSize($request->query->get('ram_size', ''));
+        $filter->setLocation($request->query->get('location', ''));
 
         return $filter;
     }

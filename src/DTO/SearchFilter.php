@@ -99,17 +99,4 @@ class SearchFilter
 
         return $filter;
     }
-
-    /**
-     * @return array
-     */
-    public function getStorageRange(): array
-    {
-        $index = array_search($this->storage, static::STORAGES, true);
-        if ($index < sizeof(static::STORAGES)) {
-            $index++;
-        }
-
-        return array_slice(static::STORAGES, 0, $index);
-    }
 }

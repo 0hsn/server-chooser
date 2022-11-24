@@ -74,11 +74,20 @@ class SearchService
         }
 
         if (! empty($filter->storage)) {
-            $storageRange = $filter->getStorageRange();
+            $pos = strpos($filter->storage, 'TB');
+            $inTB = true;
 
-            foreach ($storageRange as $storage) {
-                $criteria->orWhere(new Comparison('Storage', Comparison::EQ, $storage));
+            if (false === $pos) {
+                $pos = strpos($filter->storage, 'GB');
+                $inTB = false;
             }
+
+            $storage = substr($filter->storage, 0, $pos);
+            if (! $inTB) {
+                $storage = $storage / 1000;
+            }
+
+            $criteria->orWhere(new Comparison('StorageInTB', Comparison::LTE, $storage));
         }
 
         $matchingServers = $servers->matching($criteria);

@@ -62,8 +62,8 @@ stored on internal storage.
 ### Development
 
 - Fork the repository
-- We'll do all new change in a new branch
-- Follow _**Installation**_ steps
+- Please do all new change in a new branch
+- Follow _**Installation**_ steps for local setup
 - Use your preferred IDE / Editor to edit code
 - PR the branch against `main` repository
 

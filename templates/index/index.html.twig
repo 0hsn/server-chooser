@@ -7,12 +7,13 @@
     <section id="sc-filter">
       <div class="row">
         <h1 class="mt-5 pb-3">Server chooser</h1>
+        <p><a @click="window.location.href = webUrl" href="javascript:void()">Reset filter</a></p>
       </div>
       <div class="row">
         <div class="col-6 col-sm-6">
           <div class="mb-3">
             <!-- https://stackoverflow.com/questions/10004723/html5-input-type-range-show-range-value -->
-            <label for="storage" class="form-label">Storage [&lt; <strong x-text="storageSliderValues[storageSliderPoint]" ></strong>]</label>
+            <label for="storage" class="form-label">Storage [&le; <strong x-text="storageSliderValues[storageSliderPoint]" ></strong>]</label>
             <input type="range" class="form-range" min="0" max="10" step="1" x-model="storageSliderPoint" id="storage">
           </div>
         </div>
@@ -137,7 +138,7 @@
         ramSizes: {{ ram_sizes|json_encode|raw }},
         selectedRamSize: [],
 
-        storageSliderPoint: 2,
+        storageSliderPoint: 10,
         storageSliderValues: {{ storage_slider_values|json_encode|raw }},
 
         init() {
@@ -145,7 +146,7 @@
 
           this.selectedHddType = urlParams.get('hdd_type') ?? 'NIL'
           this.selectedLocation = urlParams.get('location') ?? 'NIL'
-          this.storageSliderPoint = this.storageSliderValues.indexOf(urlParams.get('storage_under') ?? '1TB')
+          this.storageSliderPoint = this.storageSliderValues.indexOf(urlParams.get('storage_under') ?? '72TB')
           this.selectedRamSize = urlParams.get('ram_size') ? urlParams.get('ram_size').split(',') : []
 
 

@@ -38,7 +38,7 @@ class SearchFilterTest extends KernelTestCase
         $filter = new SearchFilter;
         $filter->setRamSize("Random");
 
-        $this->assertEquals('', $filter->ramSize);
+        $this->assertEquals([], $filter->ramSize);
     }
 
     public function testSetRamSizePasses(): void
@@ -48,7 +48,7 @@ class SearchFilterTest extends KernelTestCase
         $filter = new SearchFilter;
         $filter->setRamSize("32GB");
 
-        $this->assertEquals('32GB', $filter->ramSize);
+        $this->assertEquals(['32GB'], $filter->ramSize);
     }
 
     public function testSetHDDTypeFails(): void

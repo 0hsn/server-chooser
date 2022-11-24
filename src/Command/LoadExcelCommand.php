@@ -51,6 +51,7 @@ class LoadExcelCommand extends Command
             $excelData = $sctService->addStorageInfo($excelData);
             $excelData = $sctService->addHddTypeInfo($excelData);
             $excelData = $sctService->addRamSizeInfo($excelData);
+            $excelData = $sctService->addLocationInfo($excelData);
 
             $serialized = serialize($excelData);
             unset($excelData);

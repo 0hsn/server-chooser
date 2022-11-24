@@ -70,4 +70,24 @@ class SearchFilterTest extends KernelTestCase
 
         $this->assertEquals('SATA', $filter->hddType);
     }
+
+    public function testSetLocationFails(): void
+    {
+        self::bootKernel();
+
+        $filter = new SearchFilter;
+        $filter->setLocation("Random");
+
+        $this->assertEquals('', $filter->location);
+    }
+
+    public function testSetLocationPasses(): void
+    {
+        self::bootKernel();
+
+        $filter = new SearchFilter;
+        $filter->setLocation('SFO-12');
+
+        $this->assertEquals('SFO-12', $filter->location);
+    }
 }

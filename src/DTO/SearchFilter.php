@@ -35,6 +35,7 @@ class SearchFilter
     public string $storage = "";
     public array $ramSize = [];
     public string $hddType = "";
+    public string $location = "";
 
     /**
      * Set storage after validation
@@ -71,6 +72,17 @@ class SearchFilter
     public function setHDDType(string $hddType): void
     {
         $this->hddType = in_array($hddType, static::HDD_TYPE) ? $hddType : '';
+    }
+
+    /**
+     * Set location after validation
+     *
+     * @param string $location
+     * @return void
+     */
+    public function setLocation(string $location): void
+    {
+        $this->location = in_array($location, array_keys(static::LOCATIONS)) ? $location : '';
     }
 
     /**

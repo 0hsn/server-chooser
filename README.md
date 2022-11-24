@@ -28,15 +28,15 @@ Steps to install:
     $ composer install
     ```
 
-- To insert data prepare an `.xlsx` file in following format, and run the command
-to covert and store the data in internal datastore.
-
-  ![excel-iamge](docs/excel.png)
-
 
 - Make sure `/var/uploads` directory is writable
 
-- Build internal data store
+- To insert data prepare an `.xlsx` file in following format
+
+    ![excel-iamge](docs/excel.png)
+
+    Run the command to covert and store the data in internal datastore. Build internal data store
+
     ```bash
     $ php bin/console app:load-excel ~/path-to-excel/LeaseWeb_servers_filters_assignment.xlsx
     ```
@@ -49,6 +49,8 @@ to covert and store the data in internal datastore.
 - Open browser at given URL. Most of the case it's `http://127.0.0.1:8000`
 
 ### Usage
+
+**`NB:`** Make sure you have an active internet connection
 
 When browser is pointed to server location (most of the case it's 
 `http://127.0.0.1:8000`), it's expected to see following page.
